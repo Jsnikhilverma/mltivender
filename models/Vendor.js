@@ -38,6 +38,19 @@ const vendorSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  storeURL: {
+    type: String,
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
+  products: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Vendor", vendorSchema);

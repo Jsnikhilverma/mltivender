@@ -3,7 +3,7 @@ const Vendor = require("../models/Vendor");
 exports.createVendor = async (req, res) => {
   try {
     console.log("Creating vendor with data:", req.body);
-    const { name, company, email, phone, address } = req.body;
+    const { name, company, email, phone, address, storeURL } = req.body;
 
     // Check for duplicate email
     const existingVendor = await Vendor.findOne({ email });
@@ -19,6 +19,7 @@ exports.createVendor = async (req, res) => {
       email,
       phone,
       address,
+      storeURL,
     });
 
     const savedVendor = await newVendor.save();
@@ -53,7 +54,9 @@ exports.getVendorById = async (req, res) => {
 };
 exports.updateVendor = async (req, res) => {
   try {
-    const { name, company, email, phone, address } = req.body;
+    console.log("Updating vendor with data:", req.body);
+
+    const { name, company, email, phone, address, storeURL } = req.body;
 
     const existingVendor = await Vendor.findOne({ email });
     if (existingVendor && existingVendor._id.toString() !== req.params.id) {
@@ -62,11 +65,14 @@ exports.updateVendor = async (req, res) => {
         .json({ message: "Email already in use by another vendor" });
     }
 
-    const updatedVendor = await Vendor.findByIdAndUpdate(
-      req.params.id,
-      { name, company, email, phone, address },
-      { new: true }
-    );
+    const updatedVendor = await Vendor.findByIdAndUpdate(req.params.id, {
+      name,
+      company,
+      email,
+      phone,
+      address,
+      storeURL,
+    });
 
     if (!updatedVendor) {
       return res.status(404).json({ message: "Vendor not found" });
