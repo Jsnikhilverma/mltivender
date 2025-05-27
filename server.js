@@ -27,7 +27,7 @@ app.use(
       "https://ddc9833g-5173.inc1.devtunnels.ms",
       "https://multivendor-eta.vercel.app",
       "https://mltivender-production.up.railway.app",
-      "https://lambent-tulumba-876e77.netlify.app/",
+      "https://lambent-tulumba-876e77.netlify.app",
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
